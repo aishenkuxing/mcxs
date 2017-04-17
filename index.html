@@ -7,6 +7,7 @@
 		<meta name="misapplication-tap-highlight" content="no" />
 		<meta name="HandheldFriendly" content="true" />
 		<title></title>
+		<script src="resource/dev/libs/jquery-3.2.1.js"></script>
 		<script src="resource/dev/libs/mui.min.js"></script>
 		<script src="resource/dev/libs/enterfocus.js"></script>
 		<script src="resource/dev/libs/app.js"></script>
@@ -14,35 +15,44 @@
 		<link rel="stylesheet" href="resource/dev/css/pages/login/login.css" />
 		<link rel="stylesheet" href="resource/dev/css/pages/login/layer.css" />
 		<script type="text/javascript" charset="utf-8">
-			(function($, doc) {
+			(function(mui, doc) {
+				if(mui.os.ios) {
+					plus.navigator.setFullscreen(true);
+				}
+				plus.navigator.closeSplashscreen();
+
 				var as = 'pop-in'; // 默认窗口动画
-				
-				$.init();
-				$.plusReady(function() {
-					//第三方登录
-					var authBtns = ['qihoo', 'weixin', 'sinaweibo', 'qq']; //配置业务支持的第三方登录
-					var auths = {};
-					var oauthArea = doc.querySelector('.oauth-area');
-					
+
+				mui.init();
+				mui.plusReady(function() {
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
-
-					//检查 "登录状态/锁屏状态" 开始
-					if(settings.autoLogin && state.token && settings.gestures) {
-						$.openWindow({
-							url: 'unlock.html',
-							id: 'unlock',
-							show: {
-								aniShow: 'pop-in'
-							},
-							waiting: {
-								autoShow: false
+					var mainPage = mui.preload({
+						"id": 'main',
+						"url": 'main.html'
+					});
+					var main_loaded_flag = false;
+					mainPage.addEventListener("loaded", function() {
+						main_loaded_flag = true;
+					});
+					var toMain = function() {
+						//使用定时器的原因：
+						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
+						var id = setInterval(function() {
+							if(main_loaded_flag) {
+								clearInterval(id);
+								mui.fire(mainPage, 'show', null);
+								mainPage.show("pop-in");
 							}
-						});
-					} else if(settings.autoLogin && state.token) {
-						toMain();
-					} else {
+						}, 20);
+					};
+					//第三方登录
+					var authBtns = ['qihoo', 'weixin', 'sinaweibo', 'qq']; //配置业务支持的第三方登录
+					var auths = {};
+					console.info($('#oauth-area')[0])
+					var oauthArea = doc.querySelector('.oauth-area');
+					function auth() {
 						app.setState(null);
 						plus.oauth.getServices(function(services) {
 							for(var i in services) {
@@ -54,12 +64,13 @@
 									//如果微信未安装，则为不启用状态
 									btn.setAttribute('class', 'oauth-btn' + (!isInstalled && service.id === 'weixin' ? (' disabled') : ''));
 									btn.authId = service.id;
-									console.log(btn.authId);
-									btn.style.backgroundImage = 'url("resource/dev/images/common/' + service.id + '.png")'
-									oauthArea.appendChild(btn);
+									//console.log(btn.authId);
+									btn.style.backgroundImage = 'url("resource/dev/images/common/' + service.id + '.png")';
+									console.log(btn);
+									//oauthArea.appendChild(btn);
 								}
 							}
-							$(oauthArea).on('tap', '.oauth-btn', function() {
+							mui(oauthArea).on('tap', '.oauth-btn', function() {
 								if(this.classList.contains('disabled')) {
 									plus.nativeUI.toast('您尚未安装微信客户端');
 									return;
@@ -89,23 +100,45 @@
 							plus.nativeUI.toast("获取登录认证失败：" + e.message);
 						});
 					}
+					
+					auth();
+					//检查 "登录状态/锁屏状态" 开始
+//					if(settings.autoLogin && state.token && settings.gestures) {
+//						mui.openWindow({
+//							url: 'unlock.html',
+//							id: 'unlock',
+//							show: {
+//								aniShow: 'pop-in'
+//							},
+//							waiting: {
+//								autoShow: false
+//							}
+//						});
+//					} else if(settings.autoLogin && state.token) {
+//						//toMain();
+//					} else {
+//
+//					}
 					// close splash
 
 					window.addEventListener('resize', function() {
 						oauthArea.style.display = document.body.clientHeight > 400 ? 'block' : 'none';
 					}, false);
 				});
-
-				function auth() {
-
-				}
 			}(mui, document));
 		</script>
 	</head>
+	<style>
+		.body-bg {
+			background: url("resource/dev/images/common/bg.jpg");
+			background-size: 100% 100%;
+			background-position: 0px 0px;
+		}
+	</style>
 
-	<body>
+	<body class="body-bg">
 		<div class="whole">
-			<div class="title" style="line-height:180px">卖菜西施</div>
+			<div class="title"></div>
 			<div class="coordinates-icon">
 				<div class="coordinates topAct">
 					<img src="resource/dev/images/login/coordinates.png" />
@@ -128,15 +161,15 @@
 	                </span>
 						<input type="password" name="password" value="" placeholder="密码" />
 					</div>
-					<div class="mui-content-padded oauth-area">
-
-					</div>
 					<div class="login-btn common-div">登入</div>
 				</form>
 			</div>
 			<div class="forgets">
-				<a href="#">忘记密码</a>
-				<a href="#">注册用户</a>
+				<a href="#" style="color: #000;">忘记密码</a>
+				<a href="#" style="color: #000;">注册用户</a>
+			</div>
+			<div class="mui-content-padded oauth-area" id="oauth-area">
+
 			</div>
 		</div>
 	</body>
