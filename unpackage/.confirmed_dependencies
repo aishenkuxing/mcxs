@@ -1,1 +1,18 @@
-null
+{
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "resource/dev/images/common/bg.jpg",
+      "resource/dev/libs/jquery-3.2.1.js",
+      "resource/dev/libs/mui.min.js",
+      "resource/dev/libs/app.js",
+      "resource/dev/css/pages/login/login.css",
+      "resource/dev/css/pages/login/layer.css",
+      "resource/dev/images/login/coordinates.png",
+      "resource/dev/images/login/eamil.png",
+      "resource/dev/images/login/password.png"
+    ],
+    "refer": [],
+    "priority": 0
+  }
+}
