@@ -5,7 +5,7 @@
 		"iPad"
 	],
 	"id": "H53475EE2",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "mcxs",/*应用名称，程序桌面图标名称*/
+	"name": "卖菜西施",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.0",/*应用版本名称*/
 		"code": "83"
@@ -24,7 +24,7 @@
 		"Accelerometer": {
 			"description": "访问加速度感应器"
 		},
-		"Audio": {},
+
 		"Cache": {
 			"description": "管理应用缓存"
 		},
@@ -88,17 +88,17 @@
 		"NativeObj": {
 			"description": "原生对象"
 		},
-		"OAuth": {},
-		"Maps": {},
+
+
 		"Payment": {},
-		"Share": {},
-		"Statistic": {},
+
+
 		"Speech": {},
-		"Camera": {},
+
 		"Device": {},
-		"Barcode": {},
-		"Contacts": {},
-		"Messaging": {},
+
+
+
 		"Geolocation": {}
 	},
 	"plus": {
@@ -135,84 +135,25 @@
 			]
 		},
 		"splashscreen": {
-			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true
+			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,
+			"delay": "2000"
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
 			"plugins": {
-				"statics": {
-					"umeng": {
-						"appkey_ios": "",
-						"channelid_ios": "",
-						"appkey_android": "",
-						"channelid_android": ""
-					}
-				},
-				"share": {
-					"qq": {
-						"appid": "",
-						"description": "QQ分享"
-					},
-					"sina": {
-						"appkey": "",
-						"appsecret": "",
-						"redirect_uri": "",
-						"description": "可选，新浪微博分享"
-					},
-					"weixin": {
-						"appid": "",
-						"appsecret": "",
-						"description": "可选，微信分享"
-					},
-					"tencent": {
-						"appkey": "",
-						"appsecret": "",
-						"redirect_uri": "",
-						"description": "可选，腾讯微博分享"
-					}
-				},
+				"statics": {},
+				"share": {},
 				"payment": {
-					"weixin": {
-						"description": "微信支付",
-						"appid": ""
-					},
+
 					"alipay": {
 						"description": "阿里支付",
 						"scheme": ""
 					}
 				},
-				"maps": {
-					"baidu": {
-						"appkey_ios": "",
-						"appkey_android": "",
-						"appkey": "",
-						"description": ""
-					}
-				},
-				"oauth": {
-					"qq": {
-						"appid": ""
-					},
-					"sina": {
-						"appkey": "",
-						"appsecret": "",
-						"redirect_uri": ""
-					},
-					"xiaomi": {
-						"appid_android": "",
-						"appsecret_android": "",
-						"redirect_uri_android": "",
-						"appid_ios": "",
-						"appsecret_ios": "",
-						"redirect_uri_ios": ""
-					},
-					"weixin": {
-						"appid": "",
-						"appsecret": ""
-					}
-				}
+				"maps": {},
+				"oauth": {}
 			},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
@@ -274,7 +215,9 @@
 						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
 						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
 						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
-						"settings-retina": "unpackage/res/icons/58x58.png","retina8":"unpackage/res/icons/180x180.png","settings-retina8":"unpackage/res/icons/87x87.png"
+						"settings-retina": "unpackage/res/icons/58x58.png",
+						"retina8": "unpackage/res/icons/180x180.png",
+						"settings-retina8": "unpackage/res/icons/87x87.png"
 					},
 					"ipad": {
 						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
@@ -294,7 +237,8 @@
 					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
 					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
 					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
 				}
 			},
 			"statics": {
@@ -309,12 +253,10 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": ""
+						"default": ""
 					},
 					"ipad": {
-						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						/*iPad竖屏启动图片，分辨率：768x1004*/
 						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
 						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
 						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
@@ -392,13 +334,14 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+					"hdpi": "C:/Users/huangjiacheng/Desktop/未标题-1.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/huangjiacheng/Desktop/未标题-1.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/huangjiacheng/Desktop/未标题-1.png"
 				}
 			}
 		}
-	},"fullscreen":true,
+	},
+	"fullscreen": true,
 	"dependencies": {
 		"pages": {
 			"index.html": {
