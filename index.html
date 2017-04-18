@@ -9,8 +9,8 @@
 		<title></title>
 		<script src="resource/dev/libs/jquery-3.2.1.js"></script>
 		<script src="resource/dev/libs/mui.min.js"></script>
-		<script src="resource/dev/libs/enterfocus.js"></script>
-		<script src="resource/dev/libs/app.js"></script>
+		<script src="resource/dev/libs/mui.enterfocus.js"></script>
+		<script src="resource/dev/libs/common.js"></script>
 
 		<link rel="stylesheet" href="resource/dev/css/pages/login/login.css" />
 		<link rel="stylesheet" href="resource/dev/css/pages/login/layer.css" />
@@ -20,15 +20,17 @@
 				mui.init();
 				mui.plusReady(function() {
 					plus.screen.lockOrientation("portrait-primary");
-					
 					window.addEventListener('resize', function() {
-						oauthArea.style.display = document.body.clientHeight > 400 ? 'block' : 'none';
 					}, false);
-					
-					$('#login,a').on("tap",function(){
-						mui.toast('功能暂时未开放，卖菜西施欢迎您的光临！',{ duration:1000}) 
-					})
-					
+					mui(document.body).on('tap', '#login,a', function(e) {
+						mui(this).button('loading');
+						setTimeout(function() {
+							mui(this).button('reset');
+						}.bind(this), 2000);
+						mui.toast('功能暂时未开放，卖菜西施欢迎您的光临！');
+						window.CheckUpdateVersion();
+					});
+
 					if(mui.os.ios) {
 						plus.navigator.setFullscreen(true);
 					}
@@ -50,7 +52,7 @@
 			<div class="title" style="position: absolute;"></div>
 			<div class="coordinates-icon">
 				<div class="coordinates topAct">
-					<img src="resource/dev/images/login/coordinates.png"/>
+					<img src="resource/dev/images/login/coordinates.png" />
 				</div>
 				<div class="circle-1-1 circle-show-2"></div>
 				<div class="circle-2-2 circle-show-1"></div>
@@ -70,7 +72,7 @@
 	                </span>
 						<input type="password" name="password" value="" placeholder="密码" />
 					</div>
-					<div class="login-btn common-div" id="login">登入</div>
+					<div class="login-btn common-div" id="login" data-loading-icon-position="right">登入</div>
 				</form>
 			</div>
 			<div class="forgets">

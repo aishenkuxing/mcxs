@@ -5,7 +5,7 @@
 		"iPad"
 	],
 	"id": "H53475EE2",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "卖菜西施",/*应用名称，程序桌面图标名称*/
+	"name": "mcxs",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.0",/*应用版本名称*/
 		"code": "83"
@@ -199,10 +199,7 @@
 					"<uses-permission android:name=\"android.permission.READ_SMS\"/>"
 				]
 			},
-			"orientation": [
-				"portrait-primary",
-				"portrait-secondary"
-			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"orientation": ["portrait-primary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
 				"ios": {
 					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
@@ -354,7 +351,9 @@
 					"resource/dev/css/pages/login/login.css",
 					"resource/dev/css/pages/login/layer.css",
 					"resource/dev/libs/jquery-3.2.1.js",
-					"resource/dev/libs/app.js"
+					"resource/dev/libs/app.js",
+					"resource/dev/libs/mui.enterfocus.js",
+					"resource/dev/libs/common.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -362,7 +361,6 @@
 		},
 		"idle": {
 			"resources": [
-				"resource/dev/libs/mui.enterfocus.js",
 				"resource/dev/libs/easymob-webim-sdk/quickstart.md",
 				"resource/dev/images/common/iconfont-tianjia.png",
 				"resource/dev/images/common/qq.png",
