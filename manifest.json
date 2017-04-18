@@ -5,9 +5,9 @@
 		"iPad"
 	],
 	"id": "H53475EE2",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "mcxs",/*应用名称，程序桌面图标名称*/
+	"name": "卖菜西施",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.0",/*应用版本名称*/
+		"name": "1.0.2",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -353,7 +353,10 @@
 					"resource/dev/libs/jquery-3.2.1.js",
 					"resource/dev/libs/app.js",
 					"resource/dev/libs/mui.enterfocus.js",
-					"resource/dev/libs/common.js"
+					"resource/dev/libs/common.js",
+					"resource/dev/css/mui.css",
+					"resource/dev/modulers/input/website-check.js",
+					"resource/dev/libs/mui.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -369,7 +372,6 @@
 				"resource/dev/require.js",
 				"resource/dev/images/common/user-photo.png",
 				"resource/dev/libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
-				"resource/dev/css/mui.css",
 				"resource/dev/libs/md5.js",
 				"resource/dev/audio/shake.wav",
 				"resource/dev/audio/friendship.mp3",
@@ -398,8 +400,7 @@
 				"resource/dev/libs/easymob-webim-sdk/json2.js",
 				"resource/dev/libs/feedback.js",
 				"resource/dev/libs/sha1.js",
-				"resource/dev/libs/combo/text.js",
-				"resource/dev/libs/mui.js"
+				"resource/dev/libs/combo/text.js"
 			]
 		}
 	}

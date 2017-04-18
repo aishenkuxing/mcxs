@@ -1,15 +1,15 @@
 if (typeof (jQuery) != 'undefined') {
     jQuery.support.cors = true;
     jQuery.ajaxSetup({
-        async: false, 
         xhrFields: {withCredentials: true}
     });
 }
+window.serverhost = "http://www.gametec.cn";
 
 window.CheckUpdateVersion = function(){
 		$.ajax({
 			type: "get",
-			url: "http://192.168.0.106/api/mobile/getVersion",
+			url: window.serverhost + "/api/mobile/getVersion",
 			data:{
 				appkey:plus.runtime.appid,
 				version:plus.runtime.version
@@ -17,10 +17,11 @@ window.CheckUpdateVersion = function(){
 			contentType: "application/json; charset=utf-8",
 			async: true,
 			dataType:"json",
-			success: function(data) {
-				console.log(JSON.stringify(data))
-				if(data != null) {
-					plus.ui.confirm("有新版本是否更新？", function(i) {
+			success: function(req) {
+				//console.log(JSON.stringify(data))
+				if(req && req.data && req.code >0) {
+					var data = req.data;
+					plus.ui.confirm("有新版本是否更新？版本号:" + data.version, function(i) {
 						if(0 == i.index && data.id !="") {
 							if(mui.os.ios) {
 								plus.runtime.openURL(data.ios);
@@ -32,8 +33,9 @@ window.CheckUpdateVersion = function(){
 					}, "更新", ["立即更新", "取　　消"]);
 				}
 			},
-			error:function(){
-				mui.toast("网络请求失败");
+			error:function(err){
+				//console.log(JSON.stringify(err));
+				//mui.toast("网络请求失败");
 			}
 		});
 }

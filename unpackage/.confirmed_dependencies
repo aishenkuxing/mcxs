@@ -10,7 +10,12 @@
       "resource/dev/css/pages/login/layer.css",
       "resource/dev/images/login/coordinates.png",
       "resource/dev/images/login/eamil.png",
-      "resource/dev/images/login/password.png"
+      "resource/dev/images/login/password.png",
+      "resource/dev/libs/mui.enterfocus.js",
+      "resource/dev/libs/common.js",
+      "resource/dev/css/mui.css",
+      "resource/dev/modulers/input/website-check.js",
+      "resource/dev/libs/mui.js"
     ],
     "refer": [],
     "priority": 0

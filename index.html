@@ -8,35 +8,101 @@
 		<meta name="HandheldFriendly" content="true" />
 		<title></title>
 		<script src="resource/dev/libs/jquery-3.2.1.js"></script>
-		<script src="resource/dev/libs/mui.min.js"></script>
+		<script src="resource/dev/libs/mui.js"></script>
 		<script src="resource/dev/libs/mui.enterfocus.js"></script>
 		<script src="resource/dev/libs/common.js"></script>
+		<script type="text/javascript" src="resource/dev/modulers/input/website-check.js"></script>
+		<link rel="stylesheet" href="resource/dev/css/mui.css" />
 
-		<link rel="stylesheet" href="resource/dev/css/pages/login/login.css" />
 		<link rel="stylesheet" href="resource/dev/css/pages/login/layer.css" />
-		<script type="text/javascript" charset="utf-8">
-			(function(mui, doc) {
-				var as = 'pop-in'; // 默认窗口动画
-				mui.init();
-				mui.plusReady(function() {
-					plus.screen.lockOrientation("portrait-primary");
-					window.addEventListener('resize', function() {
-					}, false);
-					mui(document.body).on('tap', '#login,a', function(e) {
-						mui(this).button('loading');
-						setTimeout(function() {
-							mui(this).button('reset');
-						}.bind(this), 2000);
-						mui.toast('功能暂时未开放，卖菜西施欢迎您的光临！');
-						window.CheckUpdateVersion();
-					});
+		<link rel="stylesheet" href="resource/dev/css/pages/login/login.css" />
 
-					if(mui.os.ios) {
-						plus.navigator.setFullscreen(true);
+		<script type="text/javascript" charset="utf-8">
+			function openWindow() {
+				mui.openWindow({
+					url: 'pages/tab-webview-main.html',
+					id: 'tab-webview-main.html',
+					styles: {
+						/*top: newpage - top - position, //新页面顶部位置
+						bottom: newage - bottom - position, //新页面底部位置*/
+						width: '100%', //新页面宽度，默认为100%
+						height: '100%', //新页面高度，默认为100%
+					},
+					extras: {
+						//..... //自定义扩展参数，可以用来处理页面间传值
+					},
+					createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+					/*	aniShow: animationType, //页面显示动画，默认为”slide-in-right“；
+						duration: animationTime, //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；*/
+						event: 'titleUpdate', //页面显示时机，默认为titleUpdate事件时显示
+						extras: {} //窗口动画是否使用图片加速
+					},
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '正在加载...', //等待对话框上显示的提示内容
+						options: {
+							/*	width: waiting - dialog - widht, //等待框背景区域宽度，默认根据内容自动计算合适宽度
+								height: waiting - dialog - height, //等待框背景区域高度，默认根据内容自动计算合适高度
+								......*/
+						}
 					}
-					plus.navigator.closeSplashscreen();
-				});
-			}(mui, document));
+				})
+			}
+			$(document).ready(function() {
+				(function(mui, doc) {
+					var as = 'pop-in'; // 默认窗口动画
+					mui.init();
+					mui.plusReady(function() {
+						if(plus.runtime.appid == "HBuilder") {
+							serverhost = "http://192.168.0.106";
+						}
+						plus.screen.lockOrientation("portrait-primary");
+						window.addEventListener('resize', function() {}, false);
+						mui(document.body).on('tap', '#login', function(e) {
+							var taget = this;
+							mui(this).button('loading');
+							websiteFormValidate();
+							var username = $('#username').val();
+							var password = $('#password').val();
+							var promise = $.ajax({
+									type: "get",
+									url: window.serverhost + "/api/user/checkUser?username="+username+"&password="+password,
+									contentType: "application/json; charset=utf-8",
+									async: true,
+									dataType: "json",
+									success: function(req) {
+										if(req.code > 0) {
+											openWindow();
+										}else{
+											mui.toast('登入帐号密码错误！');
+											
+										}
+									},error:function(err){
+										mui(taget).button('reset');
+										console.log(JSON.stringify(err));
+									}
+								});
+							
+							promise.done(function(){
+								mui(taget).button('reset');
+								window.CheckUpdateVersion();
+							});
+						});
+
+						mui(document.body).on('tap', 'a', function(e) {
+							mui.toast('功能暂时未开放，只有内测人员可以访问！');
+							window.CheckUpdateVersion();
+						});
+
+						if(mui.os.ios) {
+							plus.navigator.setFullscreen(true);
+						}
+						plus.navigator.closeSplashscreen();
+					});
+				}(mui, document));
+			});
 		</script>
 	</head>
 	<style>
@@ -64,15 +130,15 @@
 						<span class="eamil-icon common-icon">
 	                	<img src="resource/dev/images/login/eamil.png"/>
 	                </span>
-						<input type="email" name="username" value="" placeholder="帐号" />
+						<input type="email" name="username" id="username" value="hjc" placeholder="帐号" />
 					</div>
 					<div class="user-pasw common-div">
 						<span class="pasw-icon common-icon">
 	                	<img src="resource/dev/images/login/password.png" />
 	                </span>
-						<input type="password" name="password" value="" placeholder="密码" />
+						<input type="password" name="password" id="password" value="123456" placeholder="密码" />
 					</div>
-					<div class="login-btn common-div" id="login" data-loading-icon-position="right">登入</div>
+					<div class="login-btn common-div" id="login" data-loading-icon-position="right" data-loading-text="正在登入...">登入</div>
 				</form>
 			</div>
 			<div class="forgets">
