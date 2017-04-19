@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta charset="utf-8">
+		<title>卖菜西施</title>
+		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
+
+		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
+		<script src="../resource/dev/libs/mui.js"></script>
+	</head>
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			(function(mui, doc) {
+				mui.init();
+				mui.plusReady(function() {
+			
+					if(mui.os.ios) {
+						plus.navigator.setFullscreen(true);
+					}
+					plus.navigator.closeSplashscreen();
+				})
+
+			}(mui, document));
+		});
+	</script>
+
+	<body>
+		<article>
+
+		</article>
+		<footer>
+			<nav class="mui-bar mui-bar-tab">
+				<a id="defaultTab" class="mui-tab-item mui-active" href="tab-webview-subpage-about.html" class="active">
+					<span class="mui-icon mui-icon-home"></span>
+					<span class="mui-tab-label">西施</span>
+				</a>
+				<a class="mui-tab-item" href="#">
+					<span class="mui-icon mui-icon-extra mui-icon-extra-cold"></span>
+					<span class="mui-tab-label">商品</span>
+				</a>
+				<a class="mui-tab-item" href="#">
+					<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">9</span></span>
+					<span class="mui-tab-label">购物车</span>
+				</a>
+				<a class="mui-tab-item" href="#">
+					<span class="mui-icon mui-icon-gear"></span>
+					<span class="mui-tab-label">个人中心</span>
+				</a>
+			</nav>
+		</footer>
+
+	</body>
+
+</html>

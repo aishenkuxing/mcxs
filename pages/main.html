@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta charset="utf-8">
+		<title>卖菜西施</title>
+		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
+
+		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
+		<script src="../resource/dev/libs/mui.js"></script>
+	</head>
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			(function(mui, doc) {
+				mui.init();
+				
+				var activeTab = $("#defaultTab").attr('href');
+				var subpages = [];
+				var aniShow={}
+				
+				var subpage_style = {
+					top: '0px',
+					bottom: '55px'
+				};
+				var initEvent = function() {
+					$('.mui-bar-tab').on('tap', 'a', function(e) {
+						var _targetTab = $(this).attr('href');
+						
+						if(_targetTab == activeTab) {
+							return false;
+						}
+						//显示目标选项卡
+						//若为iOS平台或非首次显示，则直接显示
+						if(mui.os.ios) {
+							plus.webview.show(_targetTab);
+						} else {
+							//否则，使用fade-in动画，且保存变量
+//							var temp = {};
+//							temp[targetTab] = "true";
+//							mui.extend(aniShow, temp);
+							plus.webview.show(_targetTab, "fade-in", 300);
+						}
+						mui.toast("点击了页面");
+						plus.webview.hide(activeTab);
+						activeTab = _targetTab;
+					});
+
+				}
+				
+				    
+				
+
+				mui.plusReady(function() {
+					var self = plus.webview.currentWebview();
+					
+					$('.mui-tab-item').each(function(i,v) {
+						var _temp = {};
+						var _href = $(this).attr('href');
+						subpages.push(_href);
+						var sub = plus.webview.create(_href, _href, subpage_style);
+						if (i > 0) {
+							sub.hide();
+						}
+	//					else{
+	//						_temp[subpages[i]] = "true";
+	//						mui.extend(aniShow,_temp);
+	//					}
+						self.append(sub);
+					});
+					
+					var launch = plus.webview.getTopWebview();
+					console.info(JSON.stringify(launch));
+					console.log(launch.getURL());
+					
+					initEvent();
+
+					//是否全屏显示
+					if(mui.os.ios) {
+						plus.navigator.setFullscreen(true);
+					}
+					plus.navigator.closeSplashscreen();
+				})
+
+			}(mui, document));
+		});
+	</script>
+
+	<body>
+		<article>
+
+		</article>
+		<footer>
+			<nav class="mui-bar mui-bar-tab">
+				<a id="defaultTab" class="mui-tab-item mui-active" href="web-index.html" class="active">
+					<span class="mui-icon mui-icon-home"></span>
+					<span class="mui-tab-label">卖菜西施</span>
+				</a>
+				<a class="mui-tab-item" href="web-goods.html">
+					<span class="mui-icon mui-icon-extra mui-icon-extra-cold"></span>
+					<span class="mui-tab-label">商品</span>
+				</a>
+				<a class="mui-tab-item" href="web-shoppingcart.html">
+					<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">9</span></span>
+					<span class="mui-tab-label">购物车</span>
+				</a>
+				<a class="mui-tab-item" href="web-person-center.html">
+					<span class="mui-icon mui-icon-contact mui-icon-icon-contact-filled"></span>
+					<span class="mui-tab-label">个人中心</span>
+				</a>
+			</nav>
+		</footer>
+
+	</body>
+
+</html>
