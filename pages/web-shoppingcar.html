@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta charset="utf-8">
+		<title>卖菜西施</title>
+		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
+		<link rel="stylesheet" href="../resource/dev/css/pages/goods/goods.css" />
+
+		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
+		<script src="../resource/dev/libs/mui.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/swiper-3.2.5.min.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/ectouch.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/jquery.json.js"></script>
+	</head>
+	<style>
+		body {
+			background: #ffffff;
+		}
+		.aui-title-input input{
+				margin-bottom: 0;
+				border:0;
+				font-family:default;
+			}
+			.bar-button{
+				padding: 0;
+				font-family:
+			}
+	</style>
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			(function(mui, doc) {
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+				mui.plusReady(function() {
+					$('#sidebar').on('tap','li',function() {
+						$('.active').removeClass('active');
+						$(this).addClass('active');
+						var index = $(this).index();
+						$('.j-content').hide();
+						$('.j-content').eq(index).show();
+					});
+					var str=[
+					  'icon-arrow'
+					  ,'icon-service'
+					  ,'aui-icon-shop'
+					  ,'icon-exhibition'
+					  ,'icon-dow'
+					  ,'icon-shop'
+					  ,'menu-trigger'
+					  ,'aui-icon-correct'
+					  ,'aui-icon-laud'
+					  ,'aui-toast-loading'
+					  ,'icon-inform'
+					  ,'aui-icon-zan'
+					  ,'aui-icon-shi'
+					  ,'icon-set'
+					  ,'icon-msg'
+					  ,'icon-back-i'
+					  ,'aui-login-qq'
+					  ];
+					$.each(str, function(i,v) {
+						$('.toolbar').append('<span class="icon '+v+'"></span>');
+					});
+					
+				})
+			}(mui, document));
+		});
+	</script>
+
+	<body>
+		<div class="header">
+			<div class="aui-header-bg" style="background:#feab47;"></div>
+			<div class="toolbar statusbar-padding" style="min-height:500px;">
+					
+					
+			</div>
+		</div>
+		<article class="mui-content" >
+				
+		</article>
+	</body>
+
+</html>

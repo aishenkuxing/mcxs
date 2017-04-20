@@ -9,9 +9,18 @@
 		<title>卖菜西施</title>
 		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
-
+		
 		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
 		<script src="../resource/dev/libs/mui.js"></script>
+		<style>
+			.mui-bar-tab .mui-tab-item.mui-active{
+				color: #feab47;
+			}
+			.mui-bar{
+				-webkit-box-shadow:0 0 1px rgba(0,0,0,.15);
+				
+			}
+		</style>
 	</head>
 
 	<script type="text/javascript" charset="utf-8">
@@ -25,7 +34,7 @@
 				
 				var subpage_style = {
 					top: '0px',
-					bottom: '55px'
+					bottom: '51px'
 				};
 				var initEvent = function() {
 					$('.mui-bar-tab').on('tap', 'a', function(e) {
@@ -98,13 +107,13 @@
 			<nav class="mui-bar mui-bar-tab">
 				<a id="defaultTab" class="mui-tab-item mui-active" href="web-index.html" class="active">
 					<span class="mui-icon mui-icon-home"></span>
-					<span class="mui-tab-label">卖菜西施</span>
+					<span class="mui-tab-label">首页</span>
 				</a>
 				<a class="mui-tab-item" href="web-goods.html">
 					<span class="mui-icon mui-icon-extra mui-icon-extra-cold"></span>
 					<span class="mui-tab-label">商品</span>
 				</a>
-				<a class="mui-tab-item" href="web-shoppingcart.html">
+				<a class="mui-tab-item" href="web-shoppingcar.html">
 					<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">9</span></span>
 					<span class="mui-tab-label">购物车</span>
 				</a>

@@ -9,27 +9,124 @@
 		<title>卖菜西施</title>
 		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
+		<link rel="stylesheet" href="../resource/dev/css/pages/goods/goods.css" />
 
 		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
 		<script src="../resource/dev/libs/mui.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/swiper-3.2.5.min.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/ectouch.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/jquery.json.js"></script>
 	</head>
+	<style>
+		body {
+			background: #ffffff;
+		}
+		
+		.aui-title-input input {
+			margin-bottom: 0;
+			border: 0;
+			font-family: default;
+		}
+		
+		.bar-button {
+			padding: 0;
+			font-family:
+		}
+		
+		.mui-icon.searchgoods {
+			color: #ffffff;
+			font-weight: 600;
+			display: block;
+			background-repeat: no-repeat;
+			border: none;
+			position: relative;
+			right: 10px;
+		}
+		
+		.header-shaoshao {
+			color: #ffffff;
+			display: block;
+			font-weight: 600;
+			background-repeat: no-repeat;
+			border: none;
+			position: relative;
+			left: 5px;
+		}
+	</style>
 
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
 			(function(mui, doc) {
 				mui.init({
-					swipeBack:true //启用右滑关闭功能
+					swipeBack: true //启用右滑关闭功能
 				});
 				mui.plusReady(function() {
-					
-
+					$('#sidebar').on('tap', 'li', function() {
+						$('.active').removeClass('active');
+						$(this).addClass('active');
+						var index = $(this).index();
+						$('.j-content').hide();
+						$('.j-content').eq(index).show();
+					})
 				})
 			}(mui, document));
 		});
 	</script>
+
 	<body>
+		<div class="header">
+			<div class="aui-header-bg" style="background:#feab47;"></div>
+			<div class="toolbar statusbar-padding" style="min-height:50px">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-sweep header-shaoshao"></span>
+				<div class="header-title" style="height:50px; padding:0 50px">
+					<div class="title aui-title-input"><input type="text" placeholder="搜索"></div>
+				</div>
+				<a href="news.html">
+					<span class="mui-icon mui-icon-search searchgoods"></span>
+				</a>
+			</div>
+		</div>
 		<article class="mui-content">
-			我们都是中国人1
+			<div class="con">
+				<aside>
+					<div class="menu-left scrollbar-none r-line" id="sidebar">
+						<ul>
+							<li class="active">水果</li>
+							<li>蔬菜</li>
+							<li>海鲜</li>
+						</ul>
+					</div>
+				</aside>
+				<section class="menu-right padding-all j-content" style="display: block;">
+					<h5>水果</h5>
+					<ul>
+						<li class="w-3">
+							<a href="page.html"></a> <img src="../resource/dev/images/goods/top1.jpg"><span>围巾围脖</span></li>
+						<li class="w-3">
+							<a href="#"></a> <img src="../resource/dev/images/goods/top2.jpg"><span>披肩</span></li>
+					</ul>
+				</section>
+				<section class="menu-right padding-all j-content" style="display: none;">
+					<h5>蔬菜</h5>
+					<ul>
+						<li class="w-3">
+							<a href="#"></a> <img src="../resource/dev/images/goods/top7.jpg"><span>针织衫</span></li>
+					</ul>
+				</section>
+				<section class="menu-right padding-all j-content" style="display: none;">
+					<h5>海鲜</h5>
+					<ul>
+						<li class="w-3">
+							<a href="#"></a> <img src="../resource/dev/images/goods/top3.jpg"><span>小西装</span></li>
+						<li class="w-3">
+							<a href="#"></a> <img src="../resource/dev/images/goods/top4.jpg"><span>皮衣</span></li>
+						<li class="w-3">
+							<a href="#"></a> <img src="../resource/dev/images/goods/top5.jpg"><span>夹克</span></li>
+						<li class="w-3">
+							<a href="#"></a> <img src="../resource/dev/images/goods/top6.jpg"><span>卫衣</span></li>
+					</ul>
+				</section>
+			</div>
 		</article>
 	</body>
 
