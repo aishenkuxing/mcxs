@@ -17,6 +17,7 @@ const gutil = require('gulp-util'),
 	grename = require('gulp-rename'), 					//gulp 重名文件
 	gclean = require('gulp-clean'), 					//gulp 清除文件
 	runSequence = require('run-sequence'), 				//独立运行任务
+	guncss = require('gulp-uncss'),
 	plumber = require('gulp-plumber'); 					//防止管道中断
 
 var __dev = 'dev', 												//开发环境目录
@@ -58,6 +59,15 @@ var _defCssmin = {
 gulp.task('clear', function() {
 	return gulp.src(__buildFile)
 		.pipe(gclean());
+});
+
+//去除冗余样式
+gulp.task('uncss', function() {
+    gulp.src('src/css/origin.css')   //冗余css文件
+        .pipe(uncss({
+            html: ['src/origin.html']  //使用css的html页面，可多个
+        }))
+        .pipe(gulp.dest('build/css/uncss')); //输出目录
 });
 /**
  * 合并任务

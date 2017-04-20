@@ -27,6 +27,7 @@
         "gulp-imagemin": "latest",
         "gulp-changed": "latest",
         "del": "latest",
-        "lodash": "latest"
+        "lodash": "latest",
+        "gulp-uncss": "latest"
     }
 }
