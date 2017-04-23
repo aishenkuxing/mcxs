@@ -13,63 +13,54 @@
 
 		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
 		<script src="../resource/dev/libs/mui.js"></script>
-		<script type="text/javascript" src="../resource/dev/scripts/goods/swiper-3.2.5.min.js"></script>
 		<script type="text/javascript" src="../resource/dev/scripts/goods/ectouch.js"></script>
 		<script type="text/javascript" src="../resource/dev/scripts/goods/jquery.json.js"></script>
+		<script type="text/javascript" src="../resource/dev/libs/vue.js"></script>
 	</head>
-	<style>
-		body {
-			background: #ffffff;
-		}
-		
-		.aui-title-input input {
-			margin-bottom: 0;
-			border: 0;
-			font-family: default;
-		}
-		
-		.bar-button {
-			padding: 0;
-			font-family:
-		}
-		
-		.mui-icon.searchgoods {
-			color: #ffffff;
-			font-weight: 600;
-			display: block;
-			background-repeat: no-repeat;
-			border: none;
-			position: relative;
-			right: 10px;
-		}
-		
-		.header-shaoshao {
-			color: #ffffff;
-			display: block;
-			font-weight: 600;
-			background-repeat: no-repeat;
-			border: none;
-			position: relative;
-			left: 5px;
-		}
-	</style>
-
 	<script type="text/javascript" charset="utf-8">
+		webInit = {
+			event: function() {
+				$(document).on('tap', '.add-good', function(e) {
+					console.log(window.vm.$data.list);
+				});
+				$(document).on('tap', '#sidebar li', function() {
+					var _target = $(this);
+					if(_target.hasClass('active')) {
+						return false;
+					}
+					var _active = $('.active');
+					var _index = _target.index();
+					_target.addClass('active');
+					_active.removeClass('active');
+					vm.$data.title = vm.$data.list[_index];
+					if(vm.$data.numbers.length > 1) vm.$data.numbers.length--;
+					else vm.$data.numbers.push(vm.$data.numbers.length + 1);
+				});
+			}
+		}
 		$(document).ready(function() {
+			webInit.event();
+			window.vm = new Vue({
+				el: "#app",
+				data: {
+					numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+					list: ['我的搜索','水果', '蔬菜', '海鲜'],
+					title: ''
+				}
+			});
+			$('#sidebar li').eq(1).trigger('tap');
+			vm.$data.title = vm.$data.list[0];
+
+			//mui功能放在这下面
 			(function(mui, doc) {
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
 				mui.plusReady(function() {
-					$('#sidebar').on('tap', 'li', function() {
-						$('.active').removeClass('active');
-						$(this).addClass('active');
-						var index = $(this).index();
-						$('.j-content').hide();
-						$('.j-content').eq(index).show();
-					})
-				})
+
+				});
 			}(mui, document));
+
 		});
 	</script>
 
@@ -86,45 +77,33 @@
 				</a>
 			</div>
 		</div>
-		<article class="mui-content">
-			<div class="con">
+		<article class="mui-content" id="app">
+			<div class="con" style="overflow: hidden;">
 				<aside>
 					<div class="menu-left scrollbar-none r-line" id="sidebar">
 						<ul>
-							<li class="active">水果</li>
-							<li>蔬菜</li>
-							<li>海鲜</li>
+							<li v-for="item in list" v-cloak>{{item}}</li>
 						</ul>
 					</div>
 				</aside>
-				<section class="menu-right padding-all j-content" style="display: block;">
-					<h5>水果</h5>
-					<ul>
-						<li class="w-3">
-							<a href="page.html"></a> <img src="../resource/dev/images/goods/top1.jpg"><span>围巾围脖</span></li>
-						<li class="w-3">
-							<a href="#"></a> <img src="../resource/dev/images/goods/top2.jpg"><span>披肩</span></li>
-					</ul>
-				</section>
-				<section class="menu-right padding-all j-content" style="display: none;">
-					<h5>蔬菜</h5>
-					<ul>
-						<li class="w-3">
-							<a href="#"></a> <img src="../resource/dev/images/goods/top7.jpg"><span>针织衫</span></li>
-					</ul>
-				</section>
-				<section class="menu-right padding-all j-content" style="display: none;">
-					<h5>海鲜</h5>
-					<ul>
-						<li class="w-3">
-							<a href="#"></a> <img src="../resource/dev/images/goods/top3.jpg"><span>小西装</span></li>
-						<li class="w-3">
-							<a href="#"></a> <img src="../resource/dev/images/goods/top4.jpg"><span>皮衣</span></li>
-						<li class="w-3">
-							<a href="#"></a> <img src="../resource/dev/images/goods/top5.jpg"><span>夹克</span></li>
-						<li class="w-3">
-							<a href="#"></a> <img src="../resource/dev/images/goods/top6.jpg"><span>卫衣</span></li>
-					</ul>
+				<div>
+					<section class="menu-goods-right">
+						<div class="title">
+							<div class="background"></div>
+							<span v-cloak>{{title}}</span>
+						</div>
+						<ul class="mui-table-view mui-table-view-chevron menu-goods-list">
+							<li class="mui-table-view-cell mui-media" v-for="numb in numbers" v-cloak>
+								<span>
+									<img class="mui-media-object mui-pull-left"  v-bind:src="'../resource/dev/images/goods/top'+numb+'.jpg'" />
+									<div class="mui-media-body">
+										香蕉{{numb}} 
+										<p class="mui-ellipsis">￥ <span class="goods-money">55/斤</span></p>
+									</div>
+								<a><span class="mui-icon-extra mui-icon-extra-cart add-good"></span></a>
+								</span>
+							</li>
+						</ul>
 				</section>
 			</div>
 		</article>

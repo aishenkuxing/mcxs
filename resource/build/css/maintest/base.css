@@ -1,0 +1,81 @@
+
+html, body, div, h2, img, i, header, section {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    font-size: 100%;
+    font-style: inherit;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+}
+html {
+    font-family: sans-serif;
+}
+body {
+    line-height: 1;
+    background-color:#fff;
+}
+a:active {
+    outline: 0 none;
+}
+img {
+    vertical-align: middle;
+}
+html {
+    height: 100%;
+}
+body {
+    color: #2b577a;
+    font-family: Helvetica,"Hiragino Sans GB W3",arial,sans-serif;
+    font-size: 1rem;
+}
+a {
+    text-decoration: none;
+}
+
+
+
+@font-face {
+    font-family: iconfont;
+    src: url(../font/iconfont.ttf) format("truetype")
+}
+
+[class^=ui-icon-] {
+    font-family: iconfont !important;
+    font-size: 32px;
+    line-height: 44px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: .2px;
+    display: block;
+    color: rgba(0, 0, 0, .5)
+}
+
+
+@font-face {
+    font-family: iconfont;
+    src: url(../font/iconfont-full.ttf) format("truetype")
+}
+
+[class^=ui-icon-] {
+    font-family: iconfont !important;
+    font-size: 32px;
+    line-height: 44px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: .2px;
+    display: block;
+    color: rgba(0, 0, 0, .5)
+}
+
+.ui-icon-arrow::before {
+    content: "";
+}
+.ui-border-b {border-bottom:1px solid #b2b2b2;}
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+    .ui-border-b {border:0;}
+    .ui-border-b {background-position: left bottom;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, transparent), color-stop(0.5, #b2b2b2), to(#b2b2b2)); }
+    .ui-border-b {background-repeat:repeat-x;-webkit-background-size:100% 1px;}
+}
+

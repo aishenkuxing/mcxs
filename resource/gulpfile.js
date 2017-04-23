@@ -23,7 +23,7 @@ const gutil = require('gulp-util'),
 var __dev = 'dev', 												//开发环境目录
 	__devFile = __dev + '/**/*.*', 								//开发环境目录文件
 	__devFileJs = __dev + '/**/*.js', 							//开发环境目录Js文件
-	__devFileCss = __dev + '/**/*.css'; 						//开发环境目录Css文件
+	__devFileCss = __dev + '/**/*.css', 						//开发环境目录Css文件
 	__devFileImage = __dev + '/**/*.{bmp,jpg,jpeg,png,gif}'; 	//开发环境目录Css文件
 
 var __build = 'build',
@@ -63,11 +63,23 @@ gulp.task('clear', function() {
 
 //去除冗余样式
 gulp.task('uncss', function() {
-    gulp.src('src/css/origin.css')   //冗余css文件
-        .pipe(uncss({
-            html: ['src/origin.html']  //使用css的html页面，可多个
+/*    gulp.src('dev/css/pages/goods/goods.css')   //冗余css文件
+        .pipe(guncss({
+            html: ['../pages/web-goods.html']  //使用css的html页面，可多个
         }))
-        .pipe(gulp.dest('build/css/uncss')); //输出目录
+        .pipe(gulp.dest('build/css/pages/goods')); //输出目录*/
+        
+    gulp.src('dev/css/maintest/base.css')   //冗余css文件
+        .pipe(guncss({
+            html: ['../pages/maintest.html']  //使用css的html页面，可多个
+        }))
+        .pipe(gulp.dest('build/css/maintest')); //输出目录
+        
+    gulp.src('dev/css/maintest/home.css')   //冗余css文件
+        .pipe(guncss({
+            html: ['../pages/maintest.html']  //使用css的html页面，可多个
+        }))
+        .pipe(gulp.dest('build/css/maintest')); //输出目录
 });
 /**
  * 合并任务
@@ -120,7 +132,7 @@ gulp.task('images', function() {
 var watcher = gulp.watch(__devFile);
 
 gulp.task('main', function(cb) {
-	return runSequence(['images', 'jsmin', 'cssmin', 'concat']);
+	return runSequence(['images', 'jsmin', 'cssmin', 'concat','uncss']);
 });
 
 gulp.task('watch-file-change', function(cb) {
@@ -154,5 +166,5 @@ gulp.task('watch-file-change', function(cb) {
 });
 
 gulp.task('default', function(c) {
-	return runSequence('clear', ['images', 'jsmin', 'cssmin', 'concat'], 'watch-file-change');
+	return runSequence('clear', ['images', 'jsmin', 'cssmin', 'concat','uncss'], 'watch-file-change');
 });

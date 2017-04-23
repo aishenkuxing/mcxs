@@ -9,44 +9,67 @@
 		<title>卖菜西施</title>
 		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
-		<link rel="stylesheet" href="../resource/dev/css/pages/goods/goods.css" />
+		<link rel="stylesheet" href="../resource/dev/css/pages/index/index.css" />
+
 
 		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
 		<script src="../resource/dev/libs/mui.js"></script>
-		<style>
-			.aui-title-input input {
-				margin-bottom: 0;
-				border: 0;
-				font-family: default;
-			}
-			
-			.mui-icon.searchgoods {
-				color: #ffffff;
-				font-weight: 600;
-				display: block;
-				background-repeat: no-repeat;
-				border: none;
-				position: relative;
-				right: 10px;
-			}
-			
-			.header-shaoshao {
-				color: #ffffff;
-				display: block;
-				font-weight: 600;
-				background-repeat: no-repeat;
-				border: none;
-				position: relative;
-				left: 5px;
-			}
-		</style>
+		<script type="text/javascript" src="../resource/dev/libs/jssor.slider-23.1.3.mini.js"></script>
+		<script type="text/javascript" src="../resource/dev/libs/vue.js"></script>
 	</head>
 
 	<script type="text/javascript" charset="utf-8">
+		function slider() {
+			//设置图片宽高
+			var width = document.body.clientWidth;
+			var height = width / 1.6;
+			$('#jssor_1').width(width).height(height);
+			$('#slides').width(width).height(height);
+			$('#jssor_index').width(width).height(height);
+			$('.banner').height(width / 3);
+			var jssor_1_options = {
+				$AutoPlay: 1,
+				$SlideDuration: 800,
+				$SlideEasing: $Jease$.$OutQuint,
+				$CaptionSliderOptions: {
+					$Class: $JssorCaptionSlideo$
+				},
+				$ArrowNavigatorOptions: {
+					$Class: $JssorArrowNavigator$
+				},
+				$BulletNavigatorOptions: {
+					$Class: $JssorBulletNavigator$
+				}
+			};
+			var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+		}
+		
 		$(document).ready(function() {
+			slider();
+
+			window.vm = new Vue({
+				el: "#app",
+				data: {
+					numbers: [1, 2, 3, 4, 5, 6]
+				}
+			});
+			vm.$nextTick(function () {
+				//mui('#pullrefresh').pullRefresh();
+			});
+			
 			(function(mui, doc) {
 				mui.init({
-					swipeBack: true //启用右滑关闭功能
+					pullRefresh: {
+						container: '#pullrefresh',
+						swipeBack: true ,//启用右滑关闭功能
+						down: {
+							//callback: pulldownRefresh
+						},
+						up: {
+							contentrefresh: '正在加载...',
+							//callback: pullupRefresh
+						}
+					}
 				});
 				mui.plusReady(function() {
 
@@ -56,20 +79,59 @@
 	</script>
 
 	<body>
-		<div class="header">
-			<div class="aui-header-bg" style="background:#feab47;"></div>
-			<div class="toolbar statusbar-padding" style="min-height:50px">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-sweep header-shaoshao"></span>
-				<div class="header-title" style="height:50px; padding:0 50px">
-					<div class="title aui-title-input"><input type="text" placeholder="搜索"></div>
-				</div>
-				<a href="news.html">
-					<span class="mui-icon mui-icon-search searchgoods"></span>
-				</a>
-			</div>
-		</div>
-		<article class="mui-content">
-
+		<header class="mui-bar mui-bar-transparent" style="background-color: rgba(254, 171, 71,0);" >
+			<a class="mui-icon mui-icon-bars mui-icon-left-nav mui-pull-left" style="color: #fafafa;"></a>
+			<h1 class="mui-title" style="color: #fafafa;">卖菜西施</h1>
+			<a class="mui-icon mui-icon-email mui-pull-right" style="color: #fafafa;"></a>
+		</header>
+		<article class="mui-content " >
+			<section class="swiper-wrapper">
+					<div id="jssor_index" >
+						<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;overflow:hidden;visibility:hidden;">
+							<!-- Loading Screen -->
+							<div data-u="loading" style="position:absolute;top:0px;left:0px;background-color:rgba(0,0,0,0.7);">
+								<div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+								<div style="position:absolute;display:block;background:url('../resource/dev/images/index/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+							</div>
+							<div id="slides" data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;overflow:hidden;">
+								<div>
+									<img data-u="image" src="../resource/dev/images/index/timg1.jpg" style="width: 100%; height: 100%;" />
+								</div>
+								<<div>
+									<img data-u="image" src="../resource/dev/images/index/timg2.jpg" style="width: 100%; height: 100%;" />
+							</div>
+							<<div>
+								<img data-u="image" src="../resource/dev/images/index/timg3.jpg" style="width: 100%; height: 100%;" />
+						</div>
+						<div>
+							<img data-u="image" src="../resource/dev/images/index/timg4.jpg" style="width: 100%; height: 100%;" />
+						</div>
+					</div>
+					<!-- Bullet Navigator -->
+					<div data-u="navigator" class="jssorb05" style="position: absolute;bottom:16px;z-index: 99999;" data-autocenter="1">
+						<!-- bullet navigator item prototype -->
+						<div data-u="prototype" style="width:16px;height:16px;"></div>
+					</div>
+					</div>
+					</div>
+					<section id="app">
+						<!--mui-card-->
+						<div class="mui-card" v-for="numb in numbers" v-cloak>
+							<section class="ui-header-cr ui-border-b banner-index">
+								<header class="ui-header-ti">
+									<h2>精选橱窗</h2>
+									<a href="#" class="more">更多
+								</header>
+								<main class="ui-main-br">
+									<div class="ui-img">
+										<a href="#"><img class="banner" src="../resource/dev/images/index/timg3.jpg" width="100%"></a>
+									</div>
+								</main>
+							</section>
+						</div>
+						<!--mui-card-->		
+					</section>
+			</section>
 		</article>
 	</body>
 

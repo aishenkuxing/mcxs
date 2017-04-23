@@ -1,35 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta charset="utf-8">
-		<title>卖菜西施</title>
+		<title>Swiper demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+		<!-- Link Swiper's CSS -->
 		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
+		<link rel="stylesheet" href="../resource/dev/css/pages/index/index.css" />
+		<link rel="stylesheet" href="../resource/dev/css/common/swiper/swiper.css" />
 
 		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
 		<script src="../resource/dev/libs/mui.js"></script>
+		<script type="text/javascript" src="../resource/dev/libs/swiper/swiper.jquery.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/ectouch.js"></script>
+		<script type="text/javascript" src="../resource/dev/scripts/goods/jquery.json.js"></script>
+		<script type="text/javascript" src="../resource/dev/libs/vue.js"></script>
+<!-- Initialize Swiper -->
+		<script>
+			$(document).ready(function() {
+				var mySwiper = new Swiper('.swiper-container', {
+						scrollbar: '.swiper-scrollbar',
+						direction: 'vertical',
+						slidesPerView: 'auto',
+						mousewheelControl: true,
+						freeMode: true
+					});
+				window.vm = new Vue({
+					el: "#app",
+					data: {
+						numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+						list: ['我的搜索','水果', '蔬菜', '海鲜'],
+						title: ''
+					},
+					methods:{
+				      
+				   },
+				   $nextTick:function(){
+						 console.log('v-for渲染已经完成')
+					}
+				});
+				vm.$nextTick(function () {
+					mySwiper.onResize(true)
+					mySwiper.update()
+				})
+			});
+		</script>
+		<!-- Demo styles -->
+		<style>
+			html,
+			body {
+				position: relative;
+				height: 100%;
+			}
+			
+			body {
+				background: #fff;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				color: #000;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.swiper-container {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.swiper-slide {
+				height: auto;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+		</style>
 	</head>
 
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function() {
-			(function(mui, doc) {
-				mui.init({
-					swipeBack:true //启用右滑关闭功能
-				});
-				mui.plusReady(function() {
-					
-
-				})
-			}(mui, document));
-		});
-	</script>
 	<body>
-		<article class="mui-content">
-			我们都是中国人3
-		</article>
+		<!-- Swiper -->
+		<section class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"  id="app">
+					<div class="mui-card" v-for="numb in numbers">
+						<section class="ui-header-cr ui-border-b banner-index">
+							<header class="ui-header-ti">
+								<h2>精选橱窗</h2>
+								<a href="#" class="more">更多
+							</header>
+							<main class="ui-main-br">
+								<div class="ui-img">
+									<a href="#"><img class="banner" src="../resource/dev/images/index/timg3.jpg" width="100%"></a>
+								</div>
+							</main>
+						</section>
+					</div>
+				</div>
+			</div>
+			<!-- Add Scroll Bar -->
+			<div class="swiper-scrollbar"></div>
+		</section>
+
 	</body>
 
 </html>

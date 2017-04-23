@@ -7951,6 +7951,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
     };
 
     Transparent.prototype.initEvent = function() {
+
         this.scrollByElem.addEventListener('scroll', this._bufferFn);
         if (this.isNativeScroll) { //原生scroll
             this.scrollByElem.addEventListener($.EVENT_MOVE, this._bufferFn);
