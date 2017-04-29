@@ -395,7 +395,16 @@
 			},
 			"pages/web-shoppingcar.html": {
 				"resources": [
-					"resource/build/libs/vue.js"
+					"resource/build/libs/vue.js",
+					"resource/dev/css/pages/shoppingcar/style.css",
+					"resource/dev/css/icons-extra.css",
+					"resource/dev/css/mui.min.css",
+					"resource/dev/libs/mui.js",
+					"resource/dev/libs/jquery-3.2.1.js",
+					"resource/dev/css/pages/shoppingcar/shoppingcar.css",
+					"resource/dev/fonts/mui.ttf",
+					"resource/dev/images/shoppingcar/11.jpg",
+					"resource/dev/libs/vue.js"
 				],
 				"refer": [],
 				"priority": 0

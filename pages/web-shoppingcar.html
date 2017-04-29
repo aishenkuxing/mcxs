@@ -7,76 +7,117 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta charset="utf-8">
 		<title>卖菜西施</title>
-				<script type="text/javascript" src="../resource/build/libs/vue.js" ></script>
+		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
+		<link rel="stylesheet" href="../resource/dev/css/pages/shoppingcar/shoppingcar.css" />
+		
+		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
+		<script type="text/javascript" src="../resource/dev/libs/vue.js"></script>
+		<script src="../resource/dev/libs/mui.js"></script>
 	</head>
 	<style>
-		body {
-			background: #ffffff;
+		
+		body,.mui-content{
+			    background: #fff;
 		}
-		.aui-title-input input{
-				margin-bottom: 0;
-				border:0;
-				font-family:default;
-			}
-			.bar-button{
-				padding: 0;
-				font-family:
-			}
+		.mui-bar {
+		    top: 0;
+		    background-color: rgba(247,247,247,0);
+		    -webkit-box-shadow: none;
+		    box-shadow: none;
+		}
 	</style>
-
+		
 	<script type="text/javascript" charset="utf-8">
-/*		$(document).ready(function() {
+		webInit = {
+				event: function() {
+					$(document).on('tap', '.mui-numbox-btn-minus', function(e) {
+						//console.log(window.vm.$data.list);
+						var valDom = $(this).siblings('input');
+						var val = parseInt(valDom.val());
+						val = valDom.val()-1;
+						valDom.val(val);
+						if(val==valDom.parent().data("numbox-min")){
+							$(this).prop("disabled",true);
+							return false;
+						}
+						
+					});
+					$(document).on('tap', '.mui-numbox-btn-plus', function(e) {
+						//console.log(window.vm.$data.list);
+						var valDom = $(this).siblings('input');
+						var val = parseInt(valDom.val());
+						var minus = $(this).siblings('.mui-numbox-btn-minus');
+						minus.prop("disabled",false);
+						valDom.val(val+1);
+					});
+				}
+		}
+		$(document).ready(function() {
+			webInit.event();
+				window.vm = new Vue({
+					el: "#app",
+					data: {
+						list: ['我的搜索','水果', '蔬菜', '海鲜']
+					}
+				});
+				vm.$nextTick(function () {
+					//mui('#pullrefresh').pullRefresh();
+				});
 			(function(mui, doc) {
+				
 				mui.init({
 					swipeBack: true //启用右滑关闭功能
 				});
 				mui.plusReady(function() {
-					$('#sidebar').on('tap','li',function() {
-						$('.active').removeClass('active');
-						$(this).addClass('active');
-						var index = $(this).index();
-						$('.j-content').hide();
-						$('.j-content').eq(index).show();
-					});
-					var str=[
-					  'icon-arrow'
-					  ,'icon-service'
-					  ,'aui-icon-shop'
-					  ,'icon-exhibition'
-					  ,'icon-dow'
-					  ,'icon-shop'
-					  ,'menu-trigger'
-					  ,'aui-icon-correct'
-					  ,'aui-icon-laud'
-					  ,'aui-toast-loading'
-					  ,'icon-inform'
-					  ,'aui-icon-zan'
-					  ,'aui-icon-shi'
-					  ,'icon-set'
-					  ,'icon-msg'
-					  ,'icon-back-i'
-					  ,'aui-login-qq'
-					  ];
-					$.each(str, function(i,v) {
-						$('.toolbar').append('<span class="icon '+v+'"></span>');
-					});
-					
+
 				})
 			}(mui, document));
-		});*/
+		});
 	</script>
 
 	<body>
-		<div class="header">
-			<div class="aui-header-bg" style="background:#feab47;"></div>
-			<div class="toolbar statusbar-padding" style="min-height:500px;">
-					
-					
-			</div>
-		</div>
-		<article class="mui-content" >
-				
+		<header class="mui-bar" style="background-color: rgb(254, 171, 71);top:0;" >
+			<h1 class="mui-title" style="color: #fafafa;">购物车</h1>
+		</header>
+		<article class="mui-content" id="app"  v-cloak>
+				<div class="login-logo" style="display: none;">
+		    		<p>亲、您的购物车还是空空的哦，快去装满它!</p>
+		    		<button type="button" class="mui-btn mui-btn-outlined" id="goshopping">前去逛逛</button>
+			   </div>
+			   <ul class="shopcart-list">
+			    	<li class="mui-input-row mui-checkbox" v-for="numb in list">
+				   		<label><input class="check-input" name="checkbox1" value="Item1" type="checkbox" checked></label>
+		                <a href="#"><img src="../resource/dev/images/shoppingcar/11.jpg" class="shop-pic"></a>
+		                <div class="shop-list-mid">
+		                	<div class="tit">帅气夹克装男装男装包邮帅气夹克装男装男装包邮帅气夹克装男装男装包邮帅气夹克装男装男装包邮帅气夹克装男装男装包邮帅气夹克装男装男装包邮</div>
+		                	<div class="d-stock">
+				               <div class="mui-numbox" data-numbox-min='1'>
+								  <!-- "-"按钮，点击可减小当前数值 -->
+								  <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+								  <input class="mui-numbox-input" type="number" value="1"/>
+								  <!-- "+"按钮，点击可增大当前数值 -->
+								  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+								</div>
+		                     </div>
+		                     <span class="font-unit" style="left: 17rem; margin-top: 1.2rem; position: absolute;">斤</span>
+		                </div>
+		                <b class="shop-list-price">￥169 </b>
+		                <div class="del"><a><span class="mui-icon mui-icon-trash"></span></a></div>
+			    	</li>
+			   </ul>
+			   
+			 <div class="shop-fix">
+	            <button type="button" class="mui-btn mui-btn-warning" style="position: absolute;right: 0.5rem;top: 1.6rem;">
+					去结算
+				</button>
+	            <div class="js-text">
+	            	<p>合计：<b>￥217.80</b></p>
+	            	<p class="js-car">免费配送</p>
+            </div>
+	    </div>
 		</article>
+		 
 	</body>
 
 </html>
