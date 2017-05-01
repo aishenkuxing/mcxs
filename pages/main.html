@@ -30,14 +30,15 @@
 				
 				var activeTab = $("#defaultTab").attr('href');
 				var subpages = [];
-				var aniShow={}
+				var aniShow={};
+				var self = null;
 				
 				var subpage_style = {
 					top: '0px',
 					bottom: '51px'
 				};
 				var initEvent = function() {
-					$('.mui-bar-tab').on('tap', 'a', function(e) {
+					mui('.mui-bar-tab').on('tap', 'a', function(e) {
 						var _targetTab = $(this).attr('href');
 						
 						if(_targetTab == activeTab) {
@@ -54,18 +55,20 @@
 //							mui.extend(aniShow, temp);
 							plus.webview.show(_targetTab, "fade-in", 300);
 						}
-						mui.toast("点击了页面");
+						//mui.toast("点击了页面");
 						plus.webview.hide(activeTab);
 						activeTab = _targetTab;
 					});
 
 				}
 				
-				    
-				
-
 				mui.plusReady(function() {
-					var self = plus.webview.currentWebview();
+					//自定义事件，模拟点击“首页选项卡”
+					document.addEventListener('gohome', function() {
+						console.log("gohome");
+						$("#defaultTab").eq(1).trigger('tap');
+					});
+					self = plus.webview.currentWebview();
 					
 					$('.mui-tab-item').each(function(i,v) {
 						var _temp = {};
@@ -75,16 +78,10 @@
 						if (i > 0) {
 							sub.hide();
 						}
-	//					else{
-	//						_temp[subpages[i]] = "true";
-	//						mui.extend(aniShow,_temp);
-	//					}
 						self.append(sub);
 					});
 					
 					var launch = plus.webview.getTopWebview();
-					console.info(JSON.stringify(launch));
-					console.log(launch.getURL());
 					
 					initEvent();
 
@@ -94,11 +91,23 @@
 					}
 					plus.navigator.closeSplashscreen();
 				})
-
+					 
 			}(mui, document));
 		});
+		
+		 //自定义事件，模拟点击“首页选项卡”
+		document.addEventListener('gohome', function() {
+			var defaultTab = document.getElementById("defaultTab");
+			//模拟首页点击
+			mui.trigger(defaultTab, 'tap');
+			//切换选项卡高亮
+			var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+			if (defaultTab !== current) {
+				current.classList.remove('mui-active');
+				defaultTab.classList.add('mui-active');
+			}
+		});
 	</script>
-
 	<body>
 		<article>
 

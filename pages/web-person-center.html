@@ -1,107 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 	<head>
 		<meta charset="utf-8">
-		<title>Swiper demo</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<title>卖菜西施</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-		<!-- Link Swiper's CSS -->
 		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
-		<link rel="stylesheet" href="../resource/dev/css/pages/index/index.css" />
-		<link rel="stylesheet" href="../resource/dev/css/common/swiper/swiper.css" />
 
 		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
-		<script src="../resource/dev/libs/mui.js"></script>
-		<script type="text/javascript" src="../resource/dev/libs/swiper/swiper.jquery.js"></script>
-		<script type="text/javascript" src="../resource/dev/scripts/goods/ectouch.js"></script>
-		<script type="text/javascript" src="../resource/dev/scripts/goods/jquery.json.js"></script>
 		<script type="text/javascript" src="../resource/dev/libs/vue.js"></script>
-<!-- Initialize Swiper -->
-		<script>
-			$(document).ready(function() {
-				var mySwiper = new Swiper('.swiper-container', {
-						scrollbar: '.swiper-scrollbar',
-						direction: 'vertical',
-						slidesPerView: 'auto',
-						mousewheelControl: true,
-						freeMode: true
-					});
-				window.vm = new Vue({
-					el: "#app",
-					data: {
-						numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-						list: ['我的搜索','水果', '蔬菜', '海鲜'],
-						title: ''
-					},
-					methods:{
-				      
-				   },
-				   $nextTick:function(){
-						 console.log('v-for渲染已经完成')
-					}
-				});
-				vm.$nextTick(function () {
-					mySwiper.onResize(true)
-					mySwiper.update()
-				})
-			});
-		</script>
-		<!-- Demo styles -->
+		<script src="../resource/dev/libs/mui.js"></script>
 		<style>
-			html,
-			body {
-				position: relative;
-				height: 100%;
-			}
-			
-			body {
+			body,
+			.mui-content {
 				background: #fff;
-				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-				font-size: 14px;
-				color: #000;
-				margin: 0;
-				padding: 0;
 			}
 			
-			.swiper-container {
-				width: 100%;
-				height: 100%;
-			}
-			
-			.swiper-slide {
-				height: auto;
-				-webkit-box-sizing: border-box;
-				box-sizing: border-box;
+			.mui-bar {
+				top: 0;
+				background-color: rgba(247, 247, 247, 0);
+				-webkit-box-shadow: none;
+				box-shadow: none;
 			}
 		</style>
 	</head>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			webInit = {
+				event: function() {
+					$(document).on('tap', 'a', function(e) {
+						var href = $(this).data('href');
+						if(href==null || href=='')return false;
+						mui.openWindow({
+						    url: href, 
+						    id:href,
+					     	waiting:{
+					      		autoShow:true//自动显示等待框，默认为true
+					    	}
+						  });
+						return false;
+					});
+				}
+			}
+			window.vm = new Vue({
+				el: "#app",
+				data: {
+					list: ['我的搜索', '水果', '蔬菜', '海鲜']
+				}
+			});
+			vm.$nextTick(function() {
+				//mui('#pullrefresh').pullRefresh();
+			});
+			(function(mui, doc) {
+				webInit.event();
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+				mui.plusReady(function() {
+					document.getElementById("about").addEventListener('tap', function() {
+						//获得主页面的webview
+						var main = plus.webview.currentWebview().parent();
+						//触发主页面的gohome事件
+						mui.fire(main, 'gohome');
+					});
+				})
+			}(mui, document));
+		});
+	</script>
 
 	<body>
-		<!-- Swiper -->
-		<section class="swiper-container">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide"  id="app">
-					<div class="mui-card" v-for="numb in numbers">
-						<section class="ui-header-cr ui-border-b banner-index">
-							<header class="ui-header-ti">
-								<h2>精选橱窗</h2>
-								<a href="#" class="more">更多
-							</header>
-							<main class="ui-main-br">
-								<div class="ui-img">
-									<a href="#"><img class="banner" src="../resource/dev/images/index/timg3.jpg" width="100%"></a>
-								</div>
-							</main>
-						</section>
-					</div>
-				</div>
-			</div>
-			<!-- Add Scroll Bar -->
-			<div class="swiper-scrollbar"></div>
-		</section>
-
+		<header class="mui-bar mui-bar-nav" style="background-color: rgb(254, 171, 71);top:0;">
+			<h1 class="mui-title" style="color: #fafafa;">个人中心</h1>
+		</header>
+		<div class="mui-content" id="app" v-cloak>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)">
+						订单详情
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)" data-href="web-address.html">
+						收货地址
+					</a>
+				</li>
+<!--				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="javascript:void(0)">
+						优惠券
+					</a>
+				</li>-->
+			</ul>
+			<ul class="mui-table-view" style="margin-top: 25px;">
+				<li class="mui-table-view-cell">
+					<a id="about" class="mui-navigate-right">
+						卖菜西施1.0
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view" style="margin-top: 25px;">
+				<li class="mui-table-view-cell">
+					<a style="text-align: center;color: #FF3B30;">
+						未登入
+					</a>
+				</li>
+			</ul>
+		</div>
+		</style>
 	</body>
 
 </html>

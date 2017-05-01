@@ -55,15 +55,15 @@
 		}
 		$(document).ready(function() {
 			webInit.event();
-				window.vm = new Vue({
-					el: "#app",
-					data: {
-						list: ['我的搜索','水果', '蔬菜', '海鲜']
-					}
-				});
-				vm.$nextTick(function () {
-					//mui('#pullrefresh').pullRefresh();
-				});
+			window.vm = new Vue({
+				el: "#app",
+				data: {
+					list: ['我的搜索','水果', '蔬菜', '海鲜']
+				}
+			});
+			vm.$nextTick(function () {
+				//mui('#pullrefresh').pullRefresh();
+			});
 			(function(mui, doc) {
 				
 				mui.init({
@@ -74,6 +74,7 @@
 				})
 			}(mui, document));
 		});
+		
 	</script>
 
 	<body>
@@ -86,6 +87,7 @@
 		    		<button type="button" class="mui-btn mui-btn-outlined" id="goshopping">前去逛逛</button>
 			   </div>
 			   <ul class="shopcart-list">
+			   	   <!--item-->
 			    	<li class="mui-input-row mui-checkbox" v-for="numb in list">
 				   		<label><input class="check-input" name="checkbox1" value="Item1" type="checkbox" checked></label>
 		                <a href="#"><img src="../resource/dev/images/shoppingcar/11.jpg" class="shop-pic"></a>
@@ -105,6 +107,7 @@
 		                <b class="shop-list-price">￥169 </b>
 		                <div class="del"><a><span class="mui-icon mui-icon-trash"></span></a></div>
 			    	</li>
+			    <!--item-->
 			   </ul>
 			   
 			 <div class="shop-fix">

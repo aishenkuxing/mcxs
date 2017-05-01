@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta charset="utf-8">
+		<title>卖菜西施</title>
+		<link rel="stylesheet" href="../resource/dev/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../resource/dev/css/icons-extra.css" />
+		<link rel="stylesheet" href="../resource/dev/css/pages/adress/address.css" />
+
+		<script src="../resource/dev/libs/jquery-3.2.1.js"></script>
+		<script type="text/javascript" src="../resource/dev/libs/vue.js"></script>
+		<script src="../resource/dev/libs/mui.js"></script>
+	</head>
+	<style>
+		body,
+		.mui-content {
+			background: #fff;
+		}
+		
+		.mui-bar {
+			top: 0;
+			background-color: rgba(247, 247, 247, 0);
+			-webkit-box-shadow: none;
+			box-shadow: none;
+		}
+		
+		.mui-views,
+		.mui-view,
+		.mui-pages,
+		.mui-page,
+		.mui-page-content {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0.6rem;
+			bottom: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #efeff4;
+		}
+		
+		.mui-pages {
+			top: 46px;
+			height: auto;
+		}
+		
+		.mui-scroll-wrapper,
+		.mui-scroll {
+			background-color: #efeff4;
+		}
+		
+		.mui-page.mui-transitioning {
+			-webkit-transition: -webkit-transform 300ms ease;
+			transition: transform 300ms ease;
+		}
+		
+		.mui-page-left {
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+		
+		.mui-ios .mui-page-left {
+			-webkit-transform: translate3d(-20%, 0, 0);
+			transform: translate3d(-20%, 0, 0);
+		}
+		
+		.mui-navbar {
+			position: fixed;
+			right: 0;
+			left: 0;
+			z-index: 10;
+			height: 44px;
+			background-color: #f7f7f8;
+		}
+		
+		.mui-navbar .mui-bar {
+			position: absolute;
+			background: transparent;
+			text-align: center;
+		}
+		
+		.mui-android .mui-navbar-inner.mui-navbar-left {
+			opacity: 0;
+		}
+		
+		.mui-ios .mui-navbar-left .mui-left,
+		.mui-ios .mui-navbar-left .mui-center,
+		.mui-ios .mui-navbar-left .mui-right {
+			opacity: 0;
+		}
+		
+		.mui-navbar .mui-btn-nav {
+			-webkit-transition: none;
+			transition: none;
+			-webkit-transition-duration: .0s;
+			transition-duration: .0s;
+		}
+		
+		.mui-navbar .mui-bar .mui-title {
+			display: inline-block;
+			width: auto;
+		}
+		
+		.mui-page-shadow {
+			position: absolute;
+			right: 100%;
+			top: 0;
+			width: 16px;
+			height: 100%;
+			z-index: -1;
+			content: '';
+		}
+		
+		.mui-page-shadow {
+			background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+			background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+		}
+		
+		.mui-navbar-inner.mui-transitioning,
+		.mui-navbar-inner .mui-transitioning {
+			-webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+			transition: opacity 300ms ease, transform 300ms ease;
+		}
+		
+		.mui-pages .mui-page {
+			display: block;
+		}
+		
+		.mui-page .mui-table-view:first-child {
+			margin-top: 10px;
+		}
+		
+		.mui-page .mui-table-view:last-child {
+			margin-bottom: 30px;
+		}
+		
+		.mui-table-view {
+			margin-top: 10px;
+		}
+		
+		.mui-table-view span.mui-pull-right {
+			color: #999;
+		}
+		
+		.mui-table-view-divider {
+			background-color: #efeff4;
+			font-size: 14px;
+		}
+		
+		.mui-table-view-divider:before,
+		.mui-table-view-divider:after {
+			height: 0;
+		}
+		
+		.head {
+			height: 40px;
+		}
+		
+		#head {
+			line-height: 40px;
+		}
+		
+		.head-img {
+			width: 40px;
+			height: 40px;
+		}
+		
+		#head-img1 {
+			position: absolute;
+			bottom: 10px;
+			right: 40px;
+			width: 40px;
+			height: 40px;
+		}
+		
+		.update {
+			font-style: normal;
+			color: #999999;
+			margin-right: -25px;
+			font-size: 15px
+		}
+		
+		.mui-fullscreen {
+			position: fixed;
+			z-index: 20;
+			background-color: #000;
+		}
+		
+		.mui-ios .mui-navbar .mui-bar .mui-title {
+			position: static;
+		}
+		/*问题反馈在setting页面单独的css*/
+		
+		#feedback .mui-popover {
+			position: fixed;
+		}
+		
+		#feedback .mui-table-view:last-child {
+			margin-bottom: 0px;
+		}
+		
+		#feedback .mui-table-view:first-child {
+			margin-top: 0px;
+		}
+		
+		.mui-control-content {
+			background-color: white;
+			min-height: 215px;
+		}
+		
+		.mui-control-content .mui-loading {
+			margin-top: 50px;
+		}
+		a {
+		    text-decoration: none;
+		    color: #FF3366;
+		}
+	</style>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			window.vm = new Vue({
+				el: "#app",
+				data: {
+					list: ['我的搜索', '水果', '蔬菜', '海鲜']
+				}
+			});
+			vm.$nextTick(function() {
+				//mui('#pullrefresh').pullRefresh();
+			});
+			(function(mui, doc) {
+
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+				mui.plusReady(function() {
+					//关闭跳转
+					plus.nativeUI.closeWaiting();
+					//mui.currentWebview.show();
+				})
+			}(mui, document));
+		});
+	</script>
+
+	<body class="mui-fullscreen mui-android mui-android-5 mui-android-5-0">
+		<header class="mui-bar" style="background-color: rgb(254, 171, 71);top:0;">
+			<a class="mui-icon mui-action-back mui-icon-left-nav mui-pull-left" style="color: #fafafa;"></a>
+			<h1 class="mui-title" style="color: #fafafa;">管理收货地址</h1>
+			<a class="mui-icon mui-icon-plus mui-pull-right" style="color: #fafafa;"></a>
+		</header>
+		
+		<article class="mui-content mui-view" id="app" v-cloak>
+			<div id="setting" class="mui-page mui-page-left">
+				<div id="privacy" class="mui-page mui-page-center" style="">
+					<div class="mui-page-content">
+						<div class="mui-scroll-wrapper" data-scroll="5">
+							<div class="mui-scroll" style="transform: translate3d(0px, 0px, 0px) translateZ(0px);">
+								<ul class="mui-table-view mui-table-view-radio t-line">
+									<li class="mui-table-view-cell b-line">
+										<p>徐萌 18801066666</p>
+										<p>北京市海淀区双榆树东里4号楼3门303</p>
+									</li>
+									<li class="mui-table-view-cell b-line">
+										<p>
+											<a href="#address" style="padding-right:20px"><span class="mui-icon mui-icon-compose"></span>编辑</a>
+											<a href="#"><span class="mui-icon mui-icon-trash"></span>删除</a>
+										</p>
+									</li>
+								</ul>
+								<ul class="mui-table-view mui-table-view-radio t-line">
+									<li class="mui-table-view-cell b-line">
+										<p>徐萌 18801066666</p>
+										<p>北京市海淀区双榆树东里4号楼3门303</p>
+									</li>
+									<li class="mui-table-view-cell b-line">
+										<p>
+											<a href="#address" style="padding-right:20px"><span class="mui-icon mui-icon-compose"></span>编辑</a>
+											<a href="#"><span class="mui-icon mui-icon-trash"></span>删除</a>
+										</p>
+									</li>
+								</ul>
+							</div>
+							<div class="mui-scrollbar mui-scrollbar-vertical">
+								<div class="mui-scrollbar-indicator" style="transition-duration: 0ms; display: none; height: 8px; transform: translate3d(0px, -8px, 0px) translateZ(0px);"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</body>
+
+</html>

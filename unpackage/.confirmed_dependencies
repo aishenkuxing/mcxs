@@ -114,7 +114,23 @@
 			"resource/dev/libs/jquery-3.2.1.js",
 			"resource/dev/css/common/swiper/swiper.css",
 			"resource/dev/images/index/timg3.jpg",
-			"resource/dev/css/pages/index/index.css"
+			"resource/dev/css/pages/index/index.css",
+			"resource/dev/fonts/mui.ttf",
+			"pages/web-address.html"
+		],
+		"refer": [
+			"pages/web-address.html"
+		]
+	},
+	"pages/web-address.html": {
+		"resources": [
+			"resource/dev/css/pages/adress/address.css",
+			"resource/dev/css/icons-extra.css",
+			"resource/dev/css/mui.min.css",
+			"resource/dev/libs/mui.js",
+			"resource/dev/libs/vue.js",
+			"resource/dev/libs/jquery-3.2.1.js",
+			"resource/dev/fonts/mui.ttf"
 		]
 	}
 }
