@@ -18,7 +18,6 @@
 			}
 			.mui-bar{
 				-webkit-box-shadow:0 0 1px rgba(0,0,0,.15);
-				
 			}
 		</style>
 	</head>
@@ -27,7 +26,6 @@
 		$(document).ready(function() {
 			(function(mui, doc) {
 				mui.init();
-				
 				var activeTab = $("#defaultTab").attr('href');
 				var subpages = [];
 				var aniShow={};
@@ -50,26 +48,22 @@
 							plus.webview.show(_targetTab);
 						} else {
 							//否则，使用fade-in动画，且保存变量
-//							var temp = {};
-//							temp[targetTab] = "true";
-//							mui.extend(aniShow, temp);
 							plus.webview.show(_targetTab, "fade-in", 300);
+							
 						}
+						 
 						//mui.toast("点击了页面");
 						plus.webview.hide(activeTab);
 						activeTab = _targetTab;
+						var webview = plus.webview.getWebviewById(_targetTab);
+						//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+				       	mui.fire(webview,'refresh');
 					});
 
 				}
-				
 				mui.plusReady(function() {
-					//自定义事件，模拟点击“首页选项卡”
-					document.addEventListener('gohome', function() {
-						console.log("gohome");
-						$("#defaultTab").eq(1).trigger('tap');
-					});
+					mui.currentWebview.show();
 					self = plus.webview.currentWebview();
-					
 					$('.mui-tab-item').each(function(i,v) {
 						var _temp = {};
 						var _href = $(this).attr('href');

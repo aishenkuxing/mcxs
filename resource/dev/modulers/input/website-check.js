@@ -6,7 +6,15 @@ var websiteFormAttribute = {
 }
 
 window.websiteFormValidate = function(){
-	$('website-form-check').each(function(i , v){
-		
+	var flag = true;
+	$('.website-form-check').each(function(i , v){
+		var taget = $(this);
+		var empty = taget.data('empty')
+		if(!!empty&&taget.val()===''){
+			mui.toast(empty);
+			flag=false;
+			return false;
+		}	
 	});
+	return flag;
 }

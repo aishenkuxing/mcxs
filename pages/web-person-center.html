@@ -26,6 +26,9 @@
 				-webkit-box-shadow: none;
 				box-shadow: none;
 			}
+			.mui-table-view {
+			    margin-top: 20px;
+			}
 		</style>
 	</head>
 	<script type="text/javascript" charset="utf-8">
@@ -77,12 +80,25 @@
 			<h1 class="mui-title" style="color: #fafafa;">个人中心</h1>
 		</header>
 		<div class="mui-content" id="app" v-cloak>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="javascript:void(0)">
-						订单详情
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="#account">
+						<img class="mui-media-object mui-pull-left head-img" id="head-img" src="../resource/dev/images/common/user-photo.png">
+						<div class="mui-media-body">
+							卖菜西施用户
+							<p class='mui-ellipsis'>账号:卖菜西施用户</p>
+						</div>
 					</a>
 				</li>
+			</ul>
+			<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="javascript:void(0)">
+							订单详情
+						</a>
+					</li>
+				</ul>
+			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="javascript:void(0)" data-href="web-address.html">
 						收货地址
@@ -102,9 +118,9 @@
 				</li>
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell">
-					<a style="text-align: center;color: #FF3B30;">
-						未登入
+				<li class="mui-table-view-cell" id="relogin">
+					<a style="text-align: center;color: #FF3B30;" data-href="../index.html">
+						重新登入
 					</a>
 				</li>
 			</ul>

@@ -43,10 +43,25 @@
 			};
 			var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
 		}
-		
+		webInit = {
+				event: function() {
+					$(document).on('tap', 'a', function(e) {
+						var href = $(this).data('href');
+						if(href==null || href=='')return false;
+						mui.openWindow({
+						    url: href, 
+						    id:href,
+					     	waiting:{
+					      		autoShow:true//自动显示等待框，默认为true
+					    	}
+						  });
+						return false;
+					});
+				}
+			}
 		$(document).ready(function() {
 			slider();
-
+			webInit.event();
 			window.vm = new Vue({
 				el: "#app",
 				data: {
@@ -82,7 +97,7 @@
 		<header class="mui-bar mui-bar-transparent" style="background-color: rgba(254, 171, 71,0);" >
 			<a class="mui-icon mui-icon-bars mui-icon-left-nav mui-pull-left" style="color: #fafafa;"></a>
 			<h1 class="mui-title" style="color: #fafafa;">卖菜西施</h1>
-			<a class="mui-icon mui-icon-email mui-pull-right" style="color: #fafafa;"></a>
+			<a class="mui-icon mui-icon-extra mui-icon-extra-peoples mui-pull-right" style="color: #fafafa;" data-href="../index.html"></a>
 		</header>
 		<article class="mui-content " >
 			<section class="swiper-wrapper">
